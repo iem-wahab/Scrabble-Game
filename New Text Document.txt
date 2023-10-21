@@ -1,0 +1,115 @@
+#include<iostream>
+#include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
+#include <SFML\Window.hpp>
+using namespace sf;
+using namespace std;
+int main();
+void credits()
+{
+	Texture bg;
+	bg.loadFromFile("credits.jpg");
+
+	Sprite credits(bg);
+
+	RenderWindow Cred(VideoMode(1200, 700), "Credits", sf::Style::Default);
+	while (Cred.isOpen())
+	{
+		Event e;
+
+
+		while (Cred.pollEvent(e))
+		{
+
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+			{
+				Cred.close();
+				main();
+				
+			}
+
+
+		}
+
+		Cred.clear();
+		Cred.draw(credits);
+
+		Cred.display();
+	}
+
+}
+int main()
+{
+	Texture bg;
+	bg.loadFromFile("back.jpg");
+	
+	Sprite background(bg);
+	
+	RenderWindow Main(VideoMode(1200, 700), "Main Menu", sf::Style::Default);
+	while (Main.isOpen())
+	{
+		Event MenuE;
+		
+
+		while (Main.pollEvent(MenuE))
+		{
+			
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+			{
+				
+				cout << "Left" << endl;
+				// move left...
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
+			{
+				cout << "RIght" << endl;
+				// move right...
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+			{
+				Main.close();
+				 credits();
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+			{
+				exit(1);
+			}
+			if (MenuE.type == sf::Event::MouseMoved)
+			{
+				std::cout << "new mouse x: " << MenuE.mouseMove.x << std::endl;
+				std::cout << "new mouse y: " << MenuE.mouseMove.y << std::endl;
+			}
+
+
+			/*if (MenuE.type == sf::Event::MouseButtonPressed)
+			{
+				cout << "Fireeeeee" << endl;
+				 locX= sf::Mouse::getPosition(Main).x;
+				 locY= sf::Mouse::getPosition(Main).y;
+				 cout << (locX-140)/175 << " " << (locY-372)/69 << " " << endl;
+				 if ((locX-140)/175==0&&(locY-372)/69==0&&locX-140>0&&locY-372>0)
+				 {
+					 cout << "Play Game";
+				 }
+				 if ((locX - 140) / 175 == 2 && (locY - 372) / 69 == 0 && locX - 140>0 && locY - 372>0)
+				 {
+					 exit(0);
+				 }
+			}*/
+			if (MenuE.type == sf::Event::MouseButtonReleased)
+			{
+				cout << "Lefteeeee" << endl;
+			}
+		}
+	
+		Main.clear();
+		Main.draw(background);
+		
+		Main.display();
+	}
+	
+
+	return 0;
+}
